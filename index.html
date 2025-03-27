@@ -3,37 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zulu Time Fun!</title>
+  <title>Zulu Time Fun</title>
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif; /* For extra fun */
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      background: linear-gradient(120deg, #ff6347, #ffd700);
+      background: linear-gradient(120deg, #3498db, #9b59b6);
+      background-size: 200% 200%;
+      animation: colorShift 10s infinite;
       color: #fff;
       text-align: center;
     }
-    #clock {
-      font-size: 3.5rem;
-      font-weight: bold;
-      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+
+    @keyframes colorShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
+
+    #clock {
+      font-size: 4rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
     footer {
       margin-top: 30px;
       font-size: 1rem;
       font-style: italic;
-      color: #f8f8ff;
+      color: rgba(255, 255, 255, 0.8);
     }
   </style>
 </head>
 <body>
   <div>
-    <h1>Zulu Time Fun Zone!</h1>
+    <h1>Zulu Time Portal</h1>
     <div id="clock">Loading...</div>
-    <footer>"Time flies when you're having fun... especially Zulu time!"</footer>
+    <footer>Every second counts in the Zulu Zone!</footer>
   </div>
 
   <script>

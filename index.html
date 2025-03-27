@@ -12,35 +12,54 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      background: linear-gradient(120deg, #ff5733, #33ff57, #5733ff, #f39c12, #8e44ad);
-      background-size: 300% 300%;
-      animation: colorShift 8s infinite, grainEffect 0.1s steps(10) infinite;
+      background: linear-gradient(to right, #ff5733, #33ff57, #5733ff, #f39c12, #8e44ad),
+                  url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)"/></svg>');
+      background-size: cover;
+      filter: contrast(170%) brightness(150%);
+      mix-blend-mode: overlay;
       color: #fff;
       text-align: center;
     }
 
-    /* Grain effect using pseudo-element and noise */
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      background: transparent;
-      z-index: 1;
-      mix-blend-mode: overlay;
+    #clock {
+      font-size: 4rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     }
 
-    @keyframes colorShift {
-      0% { background-position: 0% 50%; }
-      25% { background-position: 50% 50%; }
-      50% { background-position: 100% 50%; }
-      75% { background-position: 50% 50%; }
-      100% { background-position: 0% 50%; }
+    footer {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Welcome to HackClub Time Zone!</h1>
+    <div id="clock">Loading...</div>
+    <footer>HackClub Time Zone</footer>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getUTCHours();
+      const minutes = now.getUTCMinutes();
+      const seconds = now.getUTCSeconds();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+
+      // Convert hours to 12-hour format
+      hours = hours % 12 || 12;
+
+      const zuluTime =
+        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm} Z`;
+      document.getElementById('clock').textContent = zuluTime;
     }
 
-    @keyframes grainEffect {
-Content(" ");   document-equiv>
-Hi 
+    setInterval(updateClock, 1000); // Update every second
+    updateClock(); // Initial call to avoid delay
+  </script>
+</body>
+</html>

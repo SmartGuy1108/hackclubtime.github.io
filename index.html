@@ -12,13 +12,34 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      background: linear-gradient(to right, #ff5733, #33ff57, #5733ff, #f39c12, #8e44ad),
-                  url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)"/></svg>');
-      background-size: cover;
-      filter: contrast(170%) brightness(150%);
-      mix-blend-mode: overlay;
+      background: linear-gradient(120deg, #ff5733, #33ff57, #5733ff, #f39c12, #8e44ad);
+      background-size: 300% 300%;
+      animation: colorShift 10s infinite;
       color: #fff;
       text-align: center;
+      position: relative; /* Enables layering */
+    }
+
+    @keyframes colorShift {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 50%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Noise layer */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)"/></svg>');
+      opacity: 0.2; /* Makes noise subtle */
+      mix-blend-mode: overlay;
+      pointer-events: none; /* Ensures it doesn't block interaction */
     }
 
     #clock {

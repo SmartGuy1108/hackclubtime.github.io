@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zulu Time Fun</title>
+  <title>HackClub Time Zone</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,16 +12,18 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      background: linear-gradient(120deg, #3498db, #9b59b6);
-      background-size: 200% 200%;
-      animation: colorShift 10s infinite;
+      background: linear-gradient(120deg, #ff5733, #33ff57, #5733ff, #f39c12, #8e44ad);
+      background-size: 300% 300%;
+      animation: colorShift 8s infinite;
       color: #fff;
       text-align: center;
     }
 
     @keyframes colorShift {
       0% { background-position: 0% 50%; }
+      25% { background-position: 50% 50%; }
       50% { background-position: 100% 50%; }
+      75% { background-position: 50% 50%; }
       100% { background-position: 0% 50%; }
     }
 
@@ -33,7 +35,7 @@
 
     footer {
       margin-top: 30px;
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-style: italic;
       color: rgba(255, 255, 255, 0.8);
     }
@@ -41,15 +43,24 @@
 </head>
 <body>
   <div>
-    <h1>Zulu Time Portal</h1>
+    <h1>Welcome to HackClub Time Zone!</h1>
     <div id="clock">Loading...</div>
-    <footer>Every second counts in the Zulu Zone!</footer>
+    <footer>HackClub Time Zone</footer>
   </div>
 
   <script>
     function updateClock() {
       const now = new Date();
-      const zuluTime = now.toISOString().split('T')[1].split('.')[0] + ' Z';
+      let hours = now.getUTCHours();
+      const minutes = now.getUTCMinutes();
+      const seconds = now.getUTCSeconds();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+
+      // Convert hours to 12-hour format
+      hours = hours % 12 || 12;
+
+      const zuluTime = 
+        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm} Z`;
       document.getElementById('clock').textContent = zuluTime;
     }
 
